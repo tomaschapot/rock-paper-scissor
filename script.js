@@ -16,9 +16,9 @@ function playerSelection() {
 	return userSelection;
 }
 
-// Game
+// Round
 
-function round(computerSelection, playerSelection) {
+function playRound(computerSelection, playerSelection) {
 	if ((playerSelection === "rock") & (computerSelection === "paper")) {
 		return "You Lose! paper beats rock";
 	} else if ((playerSelection === "rock") & (computerSelection === "rock")) {
@@ -52,4 +52,41 @@ function round(computerSelection, playerSelection) {
 	}
 }
 
-console.log(round(computerSelection(selectionOptions), playerSelection()));
+//Game
+let playerScoreCounter = 0;
+let computerScoreCounter = 0;
+
+function game(round) {
+	for (let i = 0; i < 5; i++) {
+		const result = round(
+			computerSelection(selectionOptions),
+			playerSelection()
+		);
+		if (/^You win/.test(result)) {
+			playerScoreCounter++;
+		} else if (/^Tie/.test(result)) {
+			("");
+		} else {
+			computerScoreCounter++;
+		}
+		console.log(result);
+		console.log(`Player Score:${playerScoreCounter}`);
+		console.log(`PC Score:${computerScoreCounter}`);
+	}
+}
+
+game(playRound);
+
+//result
+
+function result(computerScoreCounter, playerScoreCounter) {
+	if (computerScoreCounter > playerScoreCounter) {
+		console.log("You Lose, Game Over");
+	} else if (playerScoreCounter > computerScoreCounter) {
+		console.log("You Win, Congratz");
+	} else {
+		console.log("There is a Tie");
+	}
+}
+
+result(computerScoreCounter, playerScoreCounter);
